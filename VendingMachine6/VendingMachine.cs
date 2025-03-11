@@ -11,15 +11,18 @@ namespace VendingMachine6
     {
         private List<Item> _inventory = new List<Item>();
         private string _jsonString = string.Empty;
+
         public VendingMachine()
         {
             InitializeInventory();
             UpdateStock();
         }
+
         public int GetInventoryCount()
         {
             return _inventory.Count;
         }
+
         private void InitializeInventory()
         {
             _inventory.Clear();
@@ -31,15 +34,18 @@ namespace VendingMachine6
             _inventory.Add(new Item("Mixed Fruit Gummies", 1.25m, 15));
             _inventory.Add(new Item("Poptarts", 2.25m, 3));
         }
+
         private void UpdateStock()
         {
             _jsonString = JsonSerializer.Serialize(_inventory);
             File.WriteAllText("Stock.json", _jsonString);
         }
+
         public string GetStock()
         {
             return _jsonString;
         }
+
         public string BuyItem(int Index)
         {
             Item PickedItem = _inventory[Index - 1];
